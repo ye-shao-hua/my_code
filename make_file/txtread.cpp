@@ -10,9 +10,9 @@ int main(int argc, char **argv) {
       "w1", po::value<double>()->default_value(0.045),
       "参数w1")("w2", po::value<double>()->default_value(0.045), "参数w2")(
       "edge,e", po::value<double>()->default_value(0.0225), "参数edge")(
-      "edge_space,es", po::value<double>()->default_value(0.045),
+      "edge_space,d", po::value<double>()->default_value(0.045),
       "参数edge_space")("layer,l", po::value<int>()->default_value(2))(
-      "save_name,sn", po::value<std::string>()->default_value("input_"));
+      "save_name,s", po::value<std::string>()->default_value("input_"));
   // 命令行解析
   po::variables_map vm;
   po::store(po::parse_command_line(argc, argv, desc), vm);
