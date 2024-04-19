@@ -26,6 +26,7 @@ public:
     }
     return *this;
   }
+  std::vector<cellAdd> data() { return m_data; }
 
 private:
   std::vector<cellAdd> m_data{};

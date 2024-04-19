@@ -25,7 +25,6 @@ public:
   std::vector<std::size_t> Search(double up,
                                   double down); // 以纵坐标范围搜索单元
   void Replace_layer(std::size_t la);           // 交换层
-  void Replace_w1(double w1);
   void Replace_space(double w1, double w2, double edge, double edge_space);
   std::size_t Same_number(std::vector<std::size_t> a,
                           std::vector<std::size_t> b);
@@ -240,26 +239,47 @@ void txtRead::Replace_layer(std::size_t la) {
     }
   }
 }
-void txtRead::Replace_w1(double w1) {
-  std::size_t a;
-  /*
-    a = Same_number(Search(
-        Point<2, double>(*(master.begin()+1)),
-        Search(Point<2, double>(*(*(master.begin() + 2)).begin()) + 0.005009)));
-    for(auto i:*(die.begin()+a)){
-      i.data()[0] = i.data()[0] + 0.005009;
-    }//master右1
-
-    a = Same_number(Search(
-        Point<2, double>(*(master.begin())),
-        Search(Point<2, double>(*(*(master.begin()+1)).begin()) + 0.005009)));
-    for(auto i:*(die.begin()+a)){
-      i.data()[0] = i.data()[0] + 0.005009;
-    }//master右1
-     //*/
-}
 void txtRead::Replace_space(double w1, double w2, double edge,
-                            double edge_space) {}
+                            double edge_space) {
+  /*
+   * 目前写到水平方向扩展，刚在cell中加了pop——back函数，后面用于重新编写介质
+   * */
+  // 主导体w1
+  master.data()[0].data()[0] -= (w1 - 0.045) / 2;
+  master.data()[3].data()[0] -= (w1 - 0.045) / 2;
+  master.data()[1].data()[0] += (w1 - 0.045) / 2;
+  master.data()[2].data()[0] += (w1 - 0.045) / 2;
+  // 右边导体
+  mental.data()[3].data()[0].data()[0] += (edge - 0.0225 + (w1 - 0.045) / 2);
+  mental.data()[3].data()[3].data()[0] += (edge - 0.0225 + (w1 - 0.045) / 2);
+  mental.data()[3].data()[1].data()[0] +=
+      (edge - 0.0225 + (w1 - 0.045) / 2 + (w2 - 0.045));
+  mental.data()[3].data()[2].data()[0] +=
+      (edge - 0.0225 + (w1 - 0.045) / 2 + (w2 - 0.045));
+  // 左边导体
+  mental.data()[2].data()[1].data()[0] -=
+      ((w1 - 0.045) / 2 + (edge_space - 0.045));
+  mental.data()[2].data()[2].data()[0] -=
+      ((w1 - 0.045) / 2 + (edge_space - 0.045));
+  mental.data()[2].data()[0].data()[0] -=
+      ((w1 - 0.045) / 2 + (edge_space - 0.045) + (w1 - 0.045));
+  mental.data()[2].data()[3].data()[0] -=
+      ((w1 - 0.045) / 2 + (edge_space - 0.045) + (w1 - 0.045));
+  // 最右导体
+  mental.data()[4].data()[0].data()[0] +=
+      (w1 - 0.045) / 2 + (w2 - 0.045) + (edge - 0.0225) + (edge_space - 0.045);
+  mental.data()[4].data()[3].data()[0] +=
+      (w1 - 0.045) / 2 + (w2 - 0.045) + (edge - 0.0225) + (edge_space - 0.045);
+  mental.data()[4].data()[1].data()[0] += (w1 - 0.045) / 2 + 2 * (w2 - 0.045) +
+                                          (edge - 0.0225) +
+                                          (edge_space - 0.045);
+  mental.data()[4].data()[2].data()[0] += (w1 - 0.045) / 2 + 2 * (w2 - 0.045) +
+                                          (edge - 0.0225) +
+                                          (edge_space - 0.045);
+}
+
+// a=Same_number(Search(Point<2,double>()),Search(Point<2,double>()));
+}
 
 std::size_t txtRead::Same_number(std::vector<std::size_t> a,
                                  std::vector<std::size_t> b) {

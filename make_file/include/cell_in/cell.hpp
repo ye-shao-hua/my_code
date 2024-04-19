@@ -10,6 +10,7 @@ public:
   cell() = default;
   void reserve(std::size_t m_PointNumber) { m_data.reserve(m_PointNumber); }
   void push_back(Point<2, double> point) { m_data.push_back(point); }
+  void pop_back() { m_data.pop_back(); }
 
   cell &operator+=(Point<2, double> point) {
     this->push_back(point);
