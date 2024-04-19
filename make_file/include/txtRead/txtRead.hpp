@@ -7,11 +7,7 @@
 #include <vec_in/CellVecAdd.hpp>
 #include <vector>
 /*
- * search_line
- * 目前输出方法已经写完，准备写
- * 移动层操作：交换导体与该层数据（直接加减单层层厚倍数即可）
  * 移动距离操作：未想好
- * 搜索方法已声明，见文末。
  */
 class txtRead {
 public:
@@ -210,8 +206,10 @@ void txtRead::Replace_layer(std::size_t la) {
   }
 
   for (auto &i : mental) {
-    for (auto &j : i) {
-      j.data()[1] = j.data()[1] + (la - 2) * thick_layer;
+    if (i.get_name() != "botleft" && i.get_name() != "botright") {
+      for (auto &j : i) {
+        j.data()[1] = j.data()[1] + (la - 2) * thick_layer;
+      }
     }
   }
 
