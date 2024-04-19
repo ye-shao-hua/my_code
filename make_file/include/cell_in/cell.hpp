@@ -42,6 +42,7 @@ public:
       std::cout << std::endl;
     }
   }
+  std::vector<Point<2, double>> &data() { return m_data; }
 
 protected:
   std::vector<Point<2, double>> m_data{};

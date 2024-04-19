@@ -56,6 +56,7 @@ int main(int argc, char **argv) {
 
   a.Replace_layer(layer);
   a.Write("2.txt");
+  a.Replace_w1(w1);
 
   // a.Search(Point<2, double>{1, 2});
 }

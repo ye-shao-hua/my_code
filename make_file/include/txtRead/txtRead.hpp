@@ -1,33 +1,43 @@
 #pragma once
 #include <cstddef>
 #include <fstream>
+#include <iterator>
 #include <point_in/point.hpp>
 #include <string_view>
 #include <vec_in/CellVec.hpp>
 #include <vec_in/CellVecAdd.hpp>
 #include <vector>
 /*
- * 移动距离操作：未想好
+ * usage:
+ * 1.
+ *
  */
 class txtRead {
 public:
-  void Open(std::string_view filename);
+  void Open(std::string_view filename); // 打开文件
   cell get_master() { return master; }
   CellVec get_mental() { return mental; }
   CellVecAdd get_die() { return die; }
   void Read();
   void test();
   void Write(std::string_view filename);
-  std::vector<std::size_t> Search(Point<2, double> po);
-  std::vector<std::size_t> Search(double up, double down);
-  void Replace_layer(std::size_t la);
+  std::vector<std::size_t> Search(Point<2, double> po); // 以顶点搜索单元
+  std::vector<std::size_t> Search(double up,
+                                  double down); // 以纵坐标范围搜索单元
+  void Replace_layer(std::size_t la);           // 交换层
+  void Replace_w1(double w1);
+  void Replace_space(double w1, double w2, double edge, double edge_space);
+  std::size_t Same_number(std::vector<std::size_t> a,
+                          std::vector<std::size_t> b);
 
 private:
+  // 用于Read()
   void ReadCell(cell &ce);
   void ReadMaster() { ReadCell(master); }
   void ReadMental();
   void ReadDie();
   void ReadCorner();
+  // 用于Weite()
   void WriteCell(cell ce);
   void WriteCell(cellAdd ce);
   void WriteMaster();
@@ -45,12 +55,15 @@ private:
 };
 
 // 类成员函数的实现
+//
+// 打开文件
 void txtRead::Open(std::string_view filename) {
   ifs.open(filename.data());
   if (!ifs.is_open()) {
     throw std::runtime_error{"file not open"};
   }
 }
+// Read()系列
 void txtRead::ReadCell(cell &ce) {
   std::string buffer;
   std::size_t n_point = 0;
@@ -64,7 +77,6 @@ void txtRead::ReadCell(cell &ce) {
     ce += point;
   }
 }
-
 void txtRead::ReadMental() {
   std::size_t n_cell = 0;
   ifs >> n_cell;
@@ -104,6 +116,8 @@ void txtRead::Read() {
   ReadDie();
   ReadCorner();
 }
+
+//
 void txtRead::test() {
   ReadMaster();
   master.show();
@@ -115,7 +129,7 @@ void txtRead::test() {
   ReadCorner();
   corner.show();
 }
-
+// Write（）系列
 void txtRead::Write(std::string_view filename) {
   ofs.open(filename.data());
   WriteMaster();
@@ -123,7 +137,6 @@ void txtRead::Write(std::string_view filename) {
   WriteDie();
   WriteCorner();
 }
-
 void txtRead::WriteCell(cell ce) {
   ofs << ce.get_name() << "\n";
   ofs << ce.get_number() << "\n";
@@ -146,9 +159,7 @@ void txtRead::WriteCell(cellAdd ce) {
   }
   ofs << ce.get_value() << "\n\n";
 }
-
 void txtRead::WriteMaster() { WriteCell(master); }
-
 void txtRead::WriteMental() {
   ofs << mental.get_number() << "\n";
   for (auto i : mental) {
@@ -156,16 +167,15 @@ void txtRead::WriteMental() {
   }
   ofs << "\n";
 }
-
 void txtRead::WriteDie() {
   ofs << die.get_number() << "\n";
   for (auto i : die) {
     WriteCell(i);
   }
 }
-
 void txtRead::WriteCorner() { WriteCell(corner); }
 
+// Search()系列
 std::vector<std::size_t> txtRead::Search(Point<2, double> po) {
   std::vector<std::size_t> number{};
   for (auto k = 0; auto i : die) {
@@ -178,7 +188,6 @@ std::vector<std::size_t> txtRead::Search(Point<2, double> po) {
   }
   return number;
 }
-
 std::vector<std::size_t> txtRead::Search(double up, double down) {
   std::vector<std::size_t> number{};
   for (auto k = 0; auto i : die) {
@@ -198,6 +207,7 @@ std::vector<std::size_t> txtRead::Search(double up, double down) {
   return number;
 }
 
+// Replace系列
 void txtRead::Replace_layer(std::size_t la) {
   const double high_base = 0.4665;
   const double thick_layer = 0.187;
@@ -229,4 +239,38 @@ void txtRead::Replace_layer(std::size_t la) {
       j.data()[1] = j.data()[1] - (la - 2) * thick_layer;
     }
   }
+}
+void txtRead::Replace_w1(double w1) {
+  std::size_t a;
+  /*
+    a = Same_number(Search(
+        Point<2, double>(*(master.begin()+1)),
+        Search(Point<2, double>(*(*(master.begin() + 2)).begin()) + 0.005009)));
+    for(auto i:*(die.begin()+a)){
+      i.data()[0] = i.data()[0] + 0.005009;
+    }//master右1
+
+    a = Same_number(Search(
+        Point<2, double>(*(master.begin())),
+        Search(Point<2, double>(*(*(master.begin()+1)).begin()) + 0.005009)));
+    for(auto i:*(die.begin()+a)){
+      i.data()[0] = i.data()[0] + 0.005009;
+    }//master右1
+     //*/
+}
+void txtRead::Replace_space(double w1, double w2, double edge,
+                            double edge_space) {}
+
+std::size_t txtRead::Same_number(std::vector<std::size_t> a,
+                                 std::vector<std::size_t> b) {
+  std::size_t n = 999;
+  for (auto i : a) {
+    for (auto j : b) {
+      if (i == j) {
+        n = i;
+        return n;
+      }
+    }
+  }
+  return n;
 }

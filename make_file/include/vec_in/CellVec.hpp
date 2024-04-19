@@ -28,6 +28,7 @@ public:
       std::cout << std::endl;
     }
   }
+  std::vector<cell> &data() { return m_data; }
 
 protected:
   std::vector<cell> m_data{};
