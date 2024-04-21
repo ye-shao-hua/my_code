@@ -279,7 +279,6 @@ void txtRead::Replace_space(double w1, double w2, double edge,
 }
 
 // a=Same_number(Search(Point<2,double>()),Search(Point<2,double>()));
-}
 
 std::size_t txtRead::Same_number(std::vector<std::size_t> a,
                                  std::vector<std::size_t> b) {

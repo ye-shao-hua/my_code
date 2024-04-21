@@ -8,8 +8,10 @@ int main(int argc, char **argv) {
   // 定义命令行参数
   po::options_description desc("Allowed options");
   desc.add_options()("help,h", "帮助")(
-      "w1", po::value<double>()->default_value(0.045),
-      "参数w1")("w2", po::value<double>()->default_value(0.045), "参数w2")(
+      "input,i",
+      po::value<std::string>()->default_value("BEM_INPUT_1_132273.txt"),
+      "输入文件")("w1", po::value<double>()->default_value(0.045), "参数w1")(
+      "w2", po::value<double>()->default_value(0.045), "参数w2")(
       "edge,e", po::value<double>()->default_value(0.0225), "参数edge")(
       "edge_space,d", po::value<double>()->default_value(0.045),
       "参数edge_space")("layer,l", po::value<int>()->default_value(2))(
@@ -31,10 +33,11 @@ int main(int argc, char **argv) {
   auto edge_space = vm["edge_space"].as<double>();
   auto layer = vm["layer"].as<int>();
   auto save_name = vm["save_name"].as<std::string>();
+  auto filename = vm["input"].as<std::string>();
 
   // 打开文件
   txtRead a;
-  std::string filename{"BEM_INPUT_1_132273.txt"};
+  // std::string filename{"BEM_INPUT_1_132273.txt"};
   try {
     a.Open(filename);
   } catch (std::runtime_error) {
