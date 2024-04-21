@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
       "edge,e", po::value<double>()->default_value(0.0225), "参数edge")(
       "edge_space,d", po::value<double>()->default_value(0.045),
       "参数edge_space")("layer,l", po::value<int>()->default_value(2))(
-      "save_name,s", po::value<std::string>()->default_value("input_"));
+      "save_name,s", po::value<std::string>()->default_value("2.txt"));
   // 命令行解析
   po::variables_map vm;
   po::store(po::parse_command_line(argc, argv, desc), vm);
@@ -59,7 +59,7 @@ int main(int argc, char **argv) {
 
   a.Replace_space(w1, w2, edge, edge_space);
   a.Replace_layer(layer);
-  a.Write("2.txt");
+  a.Write(save_name);
 
   // a.Search(Point<2, double>{1, 2});
 }
