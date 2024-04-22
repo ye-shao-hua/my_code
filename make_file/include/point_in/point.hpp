@@ -66,7 +66,7 @@ public:
   [[gnu::always_inline]] [[nodiscard]] constexpr bool
   operator==(const Point &other) const {
     for (auto i : std::ranges::iota_view{0uz, Dim})
-      if (this->m_data[i] != other.m_data[i])
+      if (this->m_data[i] - other.m_data[i] > 1e-10) // not equal
         return false;
     return true;
   }
@@ -107,6 +107,24 @@ public:
       is >> i;
     return is;
   }
+
+  NumberType& operator[](std::size_t index) {
+    if(index >= Dim)
+      std::cerr << "operator[]():index >= Dim\n";
+    return m_data[index];
+  }
+
+  NumberType& x() {
+    if(Dim < 1)
+      std::cerr << "x():Dim < 1\n";
+    return m_data[0];
+  }
+
+  NumberType& y() {
+    if(Dim < 2)
+      std::cerr << "y():Dim < 2\n";
+    return m_data[1];
+  } 
 
   [[gnu::always_inline]] [[nodiscard]] constexpr iterator_t begin() noexcept {
     return m_data.begin();
