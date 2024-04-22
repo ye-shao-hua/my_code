@@ -3,24 +3,28 @@
 #include <point_in/point.hpp>
 #include <string>
 #include <vector>
+#include <stacktrace>
 
 class cell {
   // cell class
 public:
+  using point_t = Point<2, double>;
   cell() = default;
   void reserve(std::size_t m_PointNumber) { m_data.reserve(m_PointNumber); }
   void push_back(Point<2, double> point) { m_data.push_back(point); }
   void pop_back() { m_data.pop_back(); }
 
-  cell &operator+=(Point<2, double> point) {
+  cell &operator+=(const Point<2, double>& point) {
     this->push_back(point);
     return *this;
   }
+
   cell &operator+=(std::string name) {
     this->m_name += name;
     return *this;
   }
-  cell &operator=(cell ce) {
+
+  cell &operator=(const cell& ce) {
     this->m_name = ce.m_name;
     this->m_PointNumber = ce.m_PointNumber;
     for (auto i : ce) {
@@ -28,6 +32,13 @@ public:
     }
     return *this;
   }
+
+  point_t& operator[](std::size_t index) {
+    if(index >= size())
+      std::cerr << "cell::operator[]():index >= size()\n";
+    return m_data[index];
+  }
+
   std::size_t size() { return m_data.size(); }
   void add_name(std::string st) { m_name += st; }
   void add_number(std::size_t si) { m_PointNumber = si; }
