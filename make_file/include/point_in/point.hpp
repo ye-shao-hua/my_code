@@ -110,7 +110,7 @@ public:
 
   NumberType& operator[](std::size_t index) {
     if(index >= Dim)
-      std::cerr << "operator[]():index >= Dim\n";
+      std::cerr << "point::operator[]():index >= Dim\n";
     return m_data[index];
   }
 
