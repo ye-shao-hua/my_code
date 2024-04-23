@@ -373,105 +373,192 @@ if (edge - 4.5 < 1e-6 && edge_space - 4.5 < 1e-6) {
   // 介质
   // 待调试代码
   // 1
+  auto die2 = die;
   std::size_t a;
   a = Same_number(Searchx(-9, -0.114519), Searchy(0.6535, 0.5545));
-  die.data()[a].data()[2].data()[0] =
+  die2.data()[a].data()[1].data()[0] =
+      mental.data()[2].data()[0].data()[0] - 2 * 0.005009;
+  die2.data()[a].data()[2].data()[0] =
       mental.data()[2].data()[0].data()[0] - 0.005009;
-  die.data()[a].data()[3].data()[0] =
+  die2.data()[a].data()[3].data()[0] =
       mental.data()[2].data()[3].data()[0] - 0.005009;
   // 2
   a = Same_number(Searchx(-0.120499, -0.10951), Searchy(0.6535, 0.5545));
-  die.data()[a].data()[1].data()[0] = mental.data()[2].data()[0].data()[0];
-  die.data()[a].data()[2].data()[0] = mental.data()[2].data()[3].data()[0];
-  die.data()[a].data()[0].data()[0] =
+  die2.data()[a].data()[1].data()[0] = mental.data()[2].data()[0].data()[0];
+  die2.data()[a].data()[2].data()[0] = mental.data()[2].data()[3].data()[0];
+  die2.data()[a].data()[0].data()[0] =
       mental.data()[2].data()[0].data()[0] - 0.005009;
-  die.data()[a].data()[3].data()[0] =
+  die2.data()[a].data()[3].data()[0] =
       mental.data()[2].data()[3].data()[0] - 0.005009;
   // 3
   a = Same_number(Searchx(-0.07049, -0.059501), Searchy(0.6535, 0.5545));
-  die.data()[a].data()[0].data()[0] = mental.data()[2].data()[1].data()[0];
-  die.data()[a].data()[3].data()[0] = mental.data()[2].data()[2].data()[0];
-  die.data()[a].data()[1].data()[0] =
+  die2.data()[a].data()[0].data()[0] = mental.data()[2].data()[1].data()[0];
+  die2.data()[a].data()[3].data()[0] = mental.data()[2].data()[2].data()[0];
+  die2.data()[a].data()[1].data()[0] =
       mental.data()[2].data()[1].data()[0] + 0.005009;
-  die.data()[a].data()[2].data()[0] =
+  die2.data()[a].data()[2].data()[0] =
       mental.data()[2].data()[2].data()[0] + 0.005009;
   // 4
   a = Same_number(Searchx(-0.065481, -0.024519), Searchy(0.6535, 0.5545));
-  die.data()[a].data()[0].data()[0] =
+  die2.data()[a].data()[0].data()[0] =
       mental.data()[2].data()[1].data()[0] + 0.005009;
-  die.data()[a].data()[5].data()[0] =
+  die2.data()[a].data()[1].data()[0] =
+      mental.data()[2].data()[1].data()[0] + 2 * 0.005009;
+  die2.data()[a].data()[5].data()[0] =
       mental.data()[2].data()[2].data()[0] + 0.005009;
-  die.data()[a].data()[3].data()[0] = master.data()[0].data()[0] - 0.005009;
-  die.data()[a].data()[4].data()[0] = master.data()[3].data()[0] - 0.005009;
+  die2.data()[a].data()[3].data()[0] = master.data()[0].data()[0] - 0.005009;
+  die2.data()[a].data()[4].data()[0] = master.data()[3].data()[0] - 0.005009;
+  die2.data()[a].data()[2].data()[0] =
+      master.data()[0].data()[0] - 2 * 0.005009;
   // 5
   a = Same_number(Searchx(-0.030499, -0.01951), Searchy(0.6535, 0.5545));
-  die.data()[a].data()[1].data()[0] = master.data()[0].data()[0];
-  die.data()[a].data()[2].data()[0] = master.data()[3].data()[0];
-  die.data()[a].data()[0].data()[0] = master.data()[0].data()[0] - 0.005009;
-  die.data()[a].data()[3].data()[0] = master.data()[3].data()[0] - 0.005009;
+  die2.data()[a].data()[1].data()[0] = master.data()[0].data()[0];
+  die2.data()[a].data()[2].data()[0] = master.data()[3].data()[0];
+  die2.data()[a].data()[0].data()[0] = master.data()[0].data()[0] - 0.005009;
+  die2.data()[a].data()[3].data()[0] = master.data()[3].data()[0] - 0.005009;
   // 6
   a = Same_number(Searchx(0.01951, 0.030499), Searchy(0.6535, 0.5545));
-  die.data()[a].data()[0].data()[0] = master.data()[1].data()[0];
-  die.data()[a].data()[3].data()[0] = master.data()[2].data()[0];
-  die.data()[a].data()[1].data()[0] = master.data()[1].data()[0] + 0.005009;
-  die.data()[a].data()[2].data()[0] = master.data()[2].data()[0] + 0.005009;
+  die2.data()[a].data()[0].data()[0] = master.data()[1].data()[0];
+  die2.data()[a].data()[3].data()[0] = master.data()[2].data()[0];
+  die2.data()[a].data()[1].data()[0] = master.data()[1].data()[0] + 0.005009;
+  die2.data()[a].data()[2].data()[0] = master.data()[2].data()[0] + 0.005009;
   // 7
   a = Same_number(Searchx(0.024519, 0.042981), Searchy(0.6535, 0.5545));
-  die.data()[a].data()[0].data()[0] = master.data()[1].data()[0] + 0.005009;
-  die.data()[a].data()[5].data()[0] = master.data()[2].data()[0] + 0.005009;
-  die.data()[a].data()[3].data()[0] =
+  die2.data()[a].data()[0].data()[0] = master.data()[1].data()[0] + 0.005009;
+  die2.data()[a].data()[1].data()[0] =
+      master.data()[1].data()[0] + 2 * 0.005009;
+  die2.data()[a].data()[5].data()[0] = master.data()[2].data()[0] + 0.005009;
+  die2.data()[a].data()[2].data()[0] =
+      mental.data()[3].data()[0].data()[0] - 2 * 0.005009;
+  die2.data()[a].data()[3].data()[0] =
       mental.data()[3].data()[0].data()[0] - 0.005009;
-  die.data()[a].data()[4].data()[0] =
+  die2.data()[a].data()[4].data()[0] =
       mental.data()[3].data()[3].data()[0] - 0.005009;
   // 8
   a = Same_number(Searchx(0.037001, 0.04799), Searchy(0.6535, 0.5545));
-  die.data()[a].data()[0].data()[0] =
+  die2.data()[a].data()[0].data()[0] =
       mental.data()[3].data()[0].data()[0] - 0.005009;
-  die.data()[a].data()[3].data()[0] =
+  die2.data()[a].data()[3].data()[0] =
       mental.data()[3].data()[3].data()[0] - 0.005009;
-  die.data()[a].data()[1].data()[0] = mental.data()[3].data()[0].data()[0];
-  die.data()[a].data()[2].data()[0] = mental.data()[3].data()[3].data()[0];
+  die2.data()[a].data()[1].data()[0] = mental.data()[3].data()[0].data()[0];
+  die2.data()[a].data()[2].data()[0] = mental.data()[3].data()[3].data()[0];
   // 9
   a = Same_number(Searchx(0.08701, 0.097999), Searchy(0.6535, 0.5545));
-  die.data()[a].data()[0].data()[0] = mental.data()[3].data()[1].data()[0];
-  die.data()[a].data()[3].data()[0] = mental.data()[3].data()[2].data()[0];
-  die.data()[a].data()[1].data()[0] =
+  die2.data()[a].data()[0].data()[0] = mental.data()[3].data()[1].data()[0];
+  die2.data()[a].data()[3].data()[0] = mental.data()[3].data()[2].data()[0];
+  die2.data()[a].data()[1].data()[0] =
       mental.data()[3].data()[1].data()[0] + 0.005009;
-  die.data()[a].data()[2].data()[0] =
+  die2.data()[a].data()[2].data()[0] =
       mental.data()[3].data()[2].data()[0] + 0.005009;
   // 10
   a = Same_number(Searchx(0.092019, 0.132981), Searchy(0.6535, 0.5545));
-  die.data()[a].data()[0].data()[0] =
+  die2.data()[a].data()[0].data()[0] =
       mental.data()[3].data()[1].data()[0] + 0.005009;
-  die.data()[a].data()[5].data()[0] =
+  die2.data()[a].data()[1].data()[0] =
+      mental.data()[3].data()[1].data()[0] + 2 * 0.005009;
+  die2.data()[a].data()[5].data()[0] =
       mental.data()[3].data()[2].data()[0] + 0.005009;
-  die.data()[a].data()[3].data()[0] =
+  die2.data()[a].data()[2].data()[0] =
+      mental.data()[4].data()[0].data()[0] - 2 * 0.005009;
+  die2.data()[a].data()[3].data()[0] =
       mental.data()[4].data()[0].data()[0] - 0.005009;
-  die.data()[a].data()[4].data()[0] =
+  die2.data()[a].data()[4].data()[0] =
       mental.data()[4].data()[3].data()[0] - 0.005009;
   // 11
   a = Same_number(Searchx(0.127001, 0.13799), Searchy(0.6535, 0.5545));
-  die.data()[a].data()[0].data()[0] =
+  die2.data()[a].data()[0].data()[0] =
       mental.data()[4].data()[0].data()[0] - 0.005009;
-  die.data()[a].data()[3].data()[0] =
+  die2.data()[a].data()[3].data()[0] =
       mental.data()[4].data()[3].data()[0] - 0.005009;
-  die.data()[a].data()[1].data()[0] = mental.data()[4].data()[0].data()[0];
-  die.data()[a].data()[2].data()[0] = mental.data()[4].data()[3].data()[0];
+  die2.data()[a].data()[1].data()[0] = mental.data()[4].data()[0].data()[0];
+  die2.data()[a].data()[2].data()[0] = mental.data()[4].data()[3].data()[0];
   // 12
   a = Same_number(Searchx(0.17701, 0.187999), Searchy(0.6535, 0.5545));
-  die.data()[a].data()[0].data()[0] = mental.data()[4].data()[1].data()[0];
-  die.data()[a].data()[3].data()[0] = mental.data()[4].data()[2].data()[0];
-  die.data()[a].data()[1].data()[0] =
+  die2.data()[a].data()[0].data()[0] = mental.data()[4].data()[1].data()[0];
+  die2.data()[a].data()[3].data()[0] = mental.data()[4].data()[2].data()[0];
+  die2.data()[a].data()[1].data()[0] =
       mental.data()[4].data()[1].data()[0] + 0.005009;
-  die.data()[a].data()[2].data()[0] =
+  die2.data()[a].data()[2].data()[0] =
       mental.data()[4].data()[2].data()[0] + 0.005009;
   // 13-----------------
   a = Same_number(Searchx(0.182019, 9), Searchy(0.6535, 0.5545));
-  die.data()[a].data()[0].data()[0] =
+  die2.data()[a].data()[0].data()[0] =
       mental.data()[4].data()[1].data()[0] + 0.005009;
-  die.data()[a].data()[4].data()[0] =
+  die2.data()[a].data()[1].data()[0] =
+      mental.data()[4].data()[1].data()[0] + 2 * 0.005009;
+  die2.data()[a].data()[4].data()[0] =
       mental.data()[4].data()[2].data()[0] + 0.005009;
 
+  // 下一行
+  // 1
+  a = Same_number(Searchx(-9, -0.118924), Searchy(0.5545, 0.5445));
+  die2[a][1] = mental[2][0] + Point<2>(-0.009414, -0.01);
+  die2[a][2] = mental[2][0] + Point<2>(-0.005009 * 2, 0);
+  // 2
+  a = Same_number(Searchx(-0.119528, -0.060472), Searchy(0.5545, 0.5445));
+  die2[a][0] = mental[2][0] + Point<2>(-0.009414, -0.01);
+  die2[a][1] = mental[2][1] + Point<2>(0.009414, -0.01);
+  die2[a][2] = mental[2][1] + Point<2>(0.005009 * 2, 0);
+  die2[a][3] = mental[2][1] + Point<2>(0.005009, 0);
+  die2[a][4] = mental[2][1];
+  die2[a][5] = mental[2][0];
+  die2[a][6] = mental[2][0] + Point<2>(-0.005009, 0);
+  die2[a][7] = mental[2][0] + Point<2>(-0.005009 * 2, 0);
+  // 3
+  a = Same_number(Searchx(-0.061076, -0.028924), Searchy(0.5545, 0.5445));
+  die2[a][0] = mental[2][1] + Point<2>(0.009414, -0.01);
+  die2[a][1] = master[0] + Point<2>(-0.009414, -0.01);
+  die2[a][2] = master[0] + Point<2>(-0.005009 * 2, 0);
+  die2[a][3] = mental[2][1] + Point<2>(0.005009 * 2, 0);
+  // 4
+  a = Same_number(Searchx(-0.029528, 0.029528), Searchy(0.5545, 0.5445));
+  die2[a][0] = master[0] + Point<2>(-0.009414, -0.01);
+  die2[a][1] = master[1] + Point<2>(0.009414, -0.01);
+  die2[a][2] = master[1] + Point<2>(0.005009 * 2, 0);
+  die2[a][3] = master[1] + Point<2>(0.005009, 0);
+  die2[a][4] = master[1];
+  die2[a][5] = master[0];
+  die2[a][6] = master[0] + Point<2>(-0.005009, 0);
+  die2[a][7] = master[0] + Point<2>(-0.005009 * 2, 0);
+  // 5
+  a = Same_number(Searchx(0.028924, 0.038576), Searchy(0.5545, 0.5445));
+  die2[a][0] = master[1] + Point<2>(0.009414, -0.01);
+  die2[a][1] = mental[3][0] + Point<2>(-0.009414, -0.01);
+  die2[a][2] = mental[3][0] + Point<2>(-0.005009 * 2, 0);
+  die2[a][3] = master[1] + Point<2>(0.005009 * 2, 0);
+  // 6
+  a = Same_number(Searchx(0.037972, 0.097028), Searchy(0.5545, 0.5445));
+  die2[a][0] = mental[3][0] + Point<2>(-0.009414, -0.01);
+  die2[a][1] = mental[3][1] + Point<2>(0.009414, -0.01);
+  die2[a][2] = mental[3][1] + Point<2>(0.005009 * 2, 0);
+  die2[a][3] = mental[3][1] + Point<2>(0.005009, 0);
+  die2[a][4] = mental[3][1];
+  die2[a][5] = mental[3][0];
+  die2[a][6] = mental[3][0] + Point<2>(-0.005009, 0);
+  die2[a][7] = mental[3][0] + Point<2>(-0.005009 * 2, 0);
+  // 7
+  a = Same_number(Searchx(0.096424, 0.128576), Searchy(0.5545, 0.5445));
+  die2[a][0] = mental[3][1] + Point<2>(0.009414, -0.01);
+  die2[a][1] = mental[4][0] + Point<2>(-0.009414, -0.01);
+  die2[a][2] = mental[4][0] + Point<2>(-0.005009 * 2, 0);
+  die2[a][3] = mental[3][1] + Point<2>(0.005009 * 2, 0);
+  // 8
+  a = Same_number(Searchx(0.127972, 0.187028), Searchy(0.5545, 0.5445));
+  die2[a][0] = mental[4][0] + Point<2>(-0.009414, -0.01);
+  die2[a][1] = mental[4][1] + Point<2>(0.009414, -0.01);
+  die2[a][2] = mental[4][1] + Point<2>(0.005009 * 2, 0);
+  die2[a][3] = mental[4][1] + Point<2>(0.005009, 0);
+  die2[a][4] = mental[4][1];
+  die2[a][5] = mental[4][0];
+  die2[a][6] = mental[4][0] + Point<2>(-0.005009, 0);
+  die2[a][7] = mental[4][0] + Point<2>(-0.005009 * 2, 0);
+  // 9
+  a = Same_number(Searchx(0.186424, 9), Searchy(0.5545, 0.5445));
+  die2[a][0] = mental[4][1] + Point<2>(0.009414, -0.01);
+  die2[a][3] = mental[4][1] + Point<2>(0.005009 * 2, 0);
+
+  // die2[a][0] = mental[4][1] + {0.005009, 0};
+  die = die2;
   /*
     a=Same_number(Searchx(-0.6125,-0.118924),Searchy(0.5545,0.5445));
     die.data()[a].data()[1].data()[0]=mental.data()[2].data()[0].data()[0];

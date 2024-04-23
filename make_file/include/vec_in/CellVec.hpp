@@ -12,12 +12,12 @@ public:
     this->m_data.push_back(cell);
     return *this;
   }
-  CellVec &operator=(CellVec Ce) {
-    this->m_number = Ce.m_number;
-    for (auto i : Ce) {
-      *this += i;
-    }
-    return *this;
+  CellVec &operator=(const CellVec &Ce) = default;
+  cell &operator[](std::size_t index) {
+    if (index >= m_data.size())
+      std::cerr << "cellvec::operator[](): index >= m_data.size()\n"
+                << index << " >= " << m_data.size() << "\n";
+    return m_data[index];
   }
   std::vector<cell>::iterator begin() { return m_data.begin(); }
   std::vector<cell>::iterator end() { return m_data.end(); }

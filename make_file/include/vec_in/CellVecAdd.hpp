@@ -17,15 +17,15 @@ public:
       std::cout << std::endl;
     }
   }
+  cellAdd &operator[](std::size_t index) {
+    if (index >= m_data.size())
+      std::cerr << "cellAdd::operator[](): index >= m_data.size()\n"
+                << index << " >= " << m_data.size() << "\n";
+    return m_data[index];
+  }
   std::vector<cellAdd>::iterator begin() { return m_data.begin(); }
   std::vector<cellAdd>::iterator end() { return m_data.end(); }
-  CellVecAdd &operator=(CellVecAdd Ce) {
-    this->m_number = Ce.m_number;
-    for (auto i : Ce) {
-      *this += i;
-    }
-    return *this;
-  }
+  CellVecAdd &operator=(const CellVecAdd &Ce) = default;
   std::vector<cellAdd> &data() { return m_data; }
 
 private:

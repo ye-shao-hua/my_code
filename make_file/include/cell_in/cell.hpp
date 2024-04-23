@@ -1,9 +1,9 @@
 #pragma once
 #include <cstddef>
 #include <point_in/point.hpp>
+#include <stacktrace>
 #include <string>
 #include <vector>
-#include <stacktrace>
 
 class cell {
   // cell class
@@ -14,7 +14,7 @@ public:
   void push_back(Point<2, double> point) { m_data.push_back(point); }
   void pop_back() { m_data.pop_back(); }
 
-  cell &operator+=(const Point<2, double>& point) {
+  cell &operator+=(const Point<2, double> &point) {
     this->push_back(point);
     return *this;
   }
@@ -24,17 +24,15 @@ public:
     return *this;
   }
 
-  cell &operator=(const cell& ce) {
+  cell &operator=(const cell &ce) {
     this->m_name = ce.m_name;
     this->m_PointNumber = ce.m_PointNumber;
-    for (auto i : ce) {
-      *this += i;
-    }
+    this->m_data = ce.m_data;
     return *this;
   }
 
-  point_t& operator[](std::size_t index) {
-    if(index >= size())
+  point_t &operator[](std::size_t index) {
+    if (index >= size())
       std::cerr << "cell::operator[]():index >= size()\n";
     return m_data[index];
   }

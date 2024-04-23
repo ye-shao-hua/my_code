@@ -101,6 +101,12 @@ public:
     std::cout << std::endl;
   }
 
+  [[gnu::always_inline]] constexpr friend std::ostream &
+  operator<<(std::ostream &os, const Point &self) {
+    self.show();
+    return os;
+  }
+
   [[gnu::always_inline]] constexpr friend std::istream &
   operator>>(std::istream &is, Point &self) {
     for (auto &i : self.m_data)
@@ -108,23 +114,23 @@ public:
     return is;
   }
 
-  NumberType& operator[](std::size_t index) {
-    if(index >= Dim)
+  NumberType &operator[](std::size_t index) {
+    if (index >= Dim)
       std::cerr << "point::operator[]():index >= Dim\n";
     return m_data[index];
   }
 
-  NumberType& x() {
-    if(Dim < 1)
+  NumberType &x() {
+    if (Dim < 1)
       std::cerr << "x():Dim < 1\n";
     return m_data[0];
   }
 
-  NumberType& y() {
-    if(Dim < 2)
+  NumberType &y() {
+    if (Dim < 2)
       std::cerr << "y():Dim < 2\n";
     return m_data[1];
-  } 
+  }
 
   [[gnu::always_inline]] [[nodiscard]] constexpr iterator_t begin() noexcept {
     return m_data.begin();
