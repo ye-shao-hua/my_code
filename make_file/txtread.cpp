@@ -56,9 +56,10 @@ int main(int argc, char **argv) {
   for (auto i : number) {
     std::cout << i << " ";
   }*/
-
+  a.Replace_init1();
   a.Replace_space(w1, w2, edge, edge_space);
   a.Replace_layer(layer);
+  a.Replace_init2(layer);
   a.Write(save_name);
 
   // a.Search(Point<2, double>{1, 2});

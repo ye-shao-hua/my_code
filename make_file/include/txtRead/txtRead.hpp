@@ -30,6 +30,8 @@ public:
   void Replace_space(double w1, double w2, double edge, double edge_space);
   std::size_t Same_number(std::vector<std::size_t> a,
                           std::vector<std::size_t> b);
+  void Replace_init1();
+  void Replace_init2(std::size_t la);
 
 private:
   // 用于Read()
@@ -582,4 +584,57 @@ std::size_t txtRead::Same_number(std::vector<std::size_t> a,
     }
   }
   return n;
+}
+
+void txtRead::Replace_init1() {
+  std::size_t a;
+  a = Same_number(Searchx(-9, 9), Searchy(0.6745, 0.6535));
+  cellAdd ce;
+  ce += die[a].get_name();
+  ce.add_number(4);
+  ce += Point<2>{-0.6125, 0.6535};
+  ce += Point<2>{0.68, 0.6535};
+  ce += Point<2>{0.68, 0.6745};
+  ce += Point<2>{-0.6125, 0.6745};
+  ce.add_value(die[a].get_value());
+  die[a] = ce;
+}
+
+void txtRead::Replace_init2(std::size_t la) {
+  cellAdd ce;
+  std::size_t a;
+  const double high_base = 0.4665;
+  const double thick_layer = 0.187;
+
+  a = Same_number(Searchx(-9, 9),
+                  Searchy(high_base + (la - 1) * thick_layer + 0.021,
+                          high_base + (la - 1) * thick_layer));
+  ce.add_name(die[a].get_name());
+  ce.add_value(die[a].get_value());
+  ce += die[a][0];
+  ce += mental[2][3] + Point<2>{-0.005009, 0};
+  ce += mental[2][3];
+  ce += mental[2][2];
+  ce += mental[2][2] + Point<2>{0.005009, 0};
+
+  ce += master[3] + Point<2>{-0.005009, 0};
+  ce += master[3];
+  ce += master[2];
+  ce += master[2] + Point<2>{0.005009, 0};
+
+  ce += mental[3][3] + Point<2>{-0.005009, 0};
+  ce += mental[3][3];
+  ce += mental[3][2];
+  ce += mental[3][2] + Point<2>{0.005009, 0};
+
+  ce += mental[4][3] + Point<2>{-0.005009, 0};
+  ce += mental[4][3];
+  ce += mental[4][2];
+  ce += mental[4][2] + Point<2>{0.005009, 0};
+
+  ce += die[a][1];
+  ce += die[a][2];
+  ce += die[a][3];
+  ce.add_number(20);
+  die[a] = ce;
 }
